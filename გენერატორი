@@ -1,0 +1,16 @@
+import itertools
+import random
+
+# Generate 8 random numbers between 1 and 10
+numbers = [random.randint(1, 10) for _ in range(8)]
+
+# Print the original string of numbers
+print("Original string: {}".format(" ".join(map(str, numbers))))
+
+# Generate all possible variants of the string
+variants = set(itertools.permutations(numbers))
+
+# Print each variant
+print("All variants:")
+for variant in variants:
+    print(" ".join(map(str, variant)))
