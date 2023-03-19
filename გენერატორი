@@ -1,7 +1,7 @@
 import itertools
 import random
 
-# Generate 8 random numbers between 1 and 10
+# Generate 8 random numbers between 0 and 10
 numbers = [random.randint(1, 10) for _ in range(8)]
 
 # Print the original string of numbers
@@ -14,3 +14,9 @@ variants = set(itertools.permutations(numbers))
 print("All variants:")
 for variant in variants:
     print(" ".join(map(str, variant)))
+
+# Save the variants to a text file
+with open("Generirebuli.txt", "w") as f:
+    for variant in variants:
+        f.write(" ".join(map(str, variant)) + "\n")
+print("Variants saved to Generirebuli.txt.")
