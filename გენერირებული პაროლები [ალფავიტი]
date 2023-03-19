@@ -1,0 +1,37 @@
+import itertools
+import os
+
+# Define the set of characters to generate combinations from
+characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+
+# Generate all combinations of length 8
+combinations = itertools.product(characters, repeat=8)
+
+# Define the maximum size of each file in bytes
+max_size = 10 * 1024 * 1024  # 10MB
+
+# Create a directory to store the split files
+os.makedirs('Desktop/combinations', exist_ok=True)
+
+# Initialize a counter for the number of lines written to the current file
+line_count = 0
+
+# Initialize a counter for the number of files written
+file_count = 0
+
+# Open the first file to save the combinations to
+with open(f'Desktop/combinations/combinations_{file_count}.txt', 'w') as f:
+    # Write each combination to the file, one per line
+    for combination in combinations:
+        # Check if the file has reached the maximum size
+        if f.tell() >= max_size:
+            # Close the current file and open a new one
+            f.close()
+            file_count += 1
+            f = open(f'Desktop/combinations/combinations_{file_count}.txt', 'w')
+            line_count = 0
+        f.write(''.join(combination) + '\n')
+        line_count += 1
+
+# Close the final file
+f.close()
